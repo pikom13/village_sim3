@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>村経営シミュレーション</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: white;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #eee;
+    }
+    #dateDisplay {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>村経営シミュレーション</h1>
+  <button onclick="advanceMonth()">次の月へ</button>
+  <div id="dateDisplay"></div>
+
+  <h2>村人一覧</h2>
+  <table id="villagerTable"></table>
+
+  <!-- JavaScript モジュール読み込み -->
+  <script type="module" src="game.js"></script>
+</body>
+</html>
