@@ -6,17 +6,14 @@ let month = 4;
 const jobList = ['なし', '農作業', '伐採'];
 const actionList = ['休養', '余暇', '農作業', '伐採'];
 
-// 村人データ初期化
-const baseVillagers = generateInitialVillagers(6);
-const villagers = baseVillagers.map(v => {
-  return {
-    ...v,
-    jobData: {
-      job: 'なし',
-      action: '休養'
-    }
-  };
-});
+// 初期村人6人を生成し、仕事データ追加
+const villagers = generateInitialVillagers(6).map(v => ({
+  ...v,
+  jobData: {
+    job: 'なし',
+    action: '休養'
+  }
+}));
 
 function advanceMonth() {
   month++;
@@ -49,7 +46,6 @@ function render() {
   villagers.forEach((v, i) => {
     const row = document.createElement('tr');
 
-    // 基本情報 + 能力値
     row.innerHTML = `
       <td>${v.name}</td>
       <td>${v.gender}</td>
@@ -111,5 +107,4 @@ function render() {
 }
 
 render();
-console.log(villagers);
 window.advanceMonth = advanceMonth;
