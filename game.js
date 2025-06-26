@@ -1,51 +1,93 @@
-// game.js
-
 import { generateInitialVillagers, getDateString } from './villager.js';
 
-let currentMonth = 4;
-let currentYear = 1000;
-let villagers = generateInitialVillagers(6);
+let year = 1000;
+let month = 4;
+const jobList = ['なし', '農作業', '伐採'];
+const actionList = ['休養', '余暇', '農作業', '伐採'];
+
+const villagers = generateInitialVillagers(6).map(v => ({
+  ...v,
+  jobData: {
+    job: 'なし',
+    action: '休養'
+  }
+}));
 
 function advanceMonth() {
-  currentMonth++;
-  if (currentMonth > 12) {
-    currentMonth = 1;
-    currentYear++;
+  month++;
+  if (month > 12) {
+    month = 1;
+    year++;
   }
-  updateDateDisplay();
-  renderVillagers();
+  render();
 }
 
-function updateDateDisplay() {
-  document.getElementById('dateDisplay').textContent = `現在：${getDateString(currentYear, currentMonth)}`;
-}
+function render() {
+  document.getElementById('dateDisplay').textContent = `${getDateString(year, month)}`;
 
-function renderVillagers() {
   const table = document.getElementById('villagerTable');
   table.innerHTML = '';
-  const headerRow = document.createElement('tr');
-  const headers = ['名前', '性別', '年齢', '種族', '体力', 'メンタル', '幸福', '筋力', '耐久', '器用', '魔力', '魅力', '知力', '勤勉', '倫理', '勇気', '好色', '肉体特性', '精神特性'];
-  headers.forEach(h => {
-    const th = document.createElement('th');
-    th.textContent = h;
-    headerRow.appendChild(th);
-  });
-  table.appendChild(headerRow);
 
-  villagers.forEach(v => {
+  // ヘッダー
+  let header = `
+    <tr>
+      <th>名前</th><th>性別</th><th>年齢</th><th>種族</th>
+      <th>職業</th><th>行動</th>
+    </tr>`;
+  table.insertAdjacentHTML('beforeend', header);
+
+  villagers.forEach((villager, index) => {
     const row = document.createElement('tr');
-    const values = [v.name, v.gender, v.age, v.race, v.hp, v.mental, v.happiness, v.str, v.end, v.dex, v.mgc, v.chm,
-      v.int, v.dil, v.eth, v.crg, v.lov, v.bodyTrait, v.mindTrait];
-    values.forEach(val => {
-      const td = document.createElement('td');
-      td.textContent = val;
-      row.appendChild(td);
+
+    // 村人情報セル
+    row.innerHTML = `
+      <td>${villager.name}</td>
+      <td>${villager.gender}</td>
+      <td>${villager.age}</td>
+      <td>${villager.race}</td>
+    `;
+
+    // 職業 select
+    const jobSelect = document.createElement('select');
+    jobList.forEach(j => {
+      const option = document.createElement('option');
+      option.value = j;
+      option.textContent = j;
+      if (villager.jobData.job === j) option.selected = true;
+      jobSelect.appendChild(option);
     });
+    jobSelect.onchange = () => {
+      villager.jobData.job = jobSelect.value;
+      villager.jobData.action = jobSelect.value; // 同じ名前の行動に更新
+      render(); // 再描画してactionセレクトも更新
+    };
+
+    // 行動 select
+    const actionSelect = document.createElement('select');
+    actionList.forEach(a => {
+      const option = document.createElement('option');
+      option.value = a;
+      option.textContent = a;
+      if (villager.jobData.action === a) option.selected = true;
+      actionSelect.appendChild(option);
+    });
+    actionSelect.onchange = () => {
+      villager.jobData.action = actionSelect.value;
+      // 職業には影響なし
+    };
+
+    // セルに追加
+    const jobCell = document.createElement('td');
+    jobCell.appendChild(jobSelect);
+    row.appendChild(jobCell);
+
+    const actionCell = document.createElement('td');
+    actionCell.appendChild(actionSelect);
+    row.appendChild(actionCell);
+
     table.appendChild(row);
   });
 }
 
+render();
 window.advanceMonth = advanceMonth;
-
-updateDateDisplay();
-renderVillagers();
