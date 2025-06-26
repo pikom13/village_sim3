@@ -110,3 +110,6 @@ function render() {
 
 render();
 window.advanceMonth = advanceMonth;
+
+export { generateInitialVillagers, getDateString };
+
