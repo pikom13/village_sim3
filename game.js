@@ -111,4 +111,5 @@ function render() {
 }
 
 render();
+console.log(villagers);
 window.advanceMonth = advanceMonth;
