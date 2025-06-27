@@ -103,7 +103,7 @@ function generateInitialVillagers(count) {
     const mindTrait = randFrom(mindTraitList);
 
     const bodyEffects = gender === '男' ? maleBodyTraits[bodyTrait] : femaleBodyTraits[bodyTrait];
-    const mindEffects = gender === '男' ? maleMindTraits[mindTrait] : femaleMineTraits[mindTrait];
+    const mindEffects = gender === '男' ? maleMindTraits[mindTrait] : femaleMindTraits[mindTrait];
 
 // 肉体特性補正
     for (const key in bodyEffects) {
