@@ -12,7 +12,28 @@ function randRange(min, max) {
 
 function generateInitialVillagers(count) {
   const villagers = [];
-  const maleBodyTraits = {
+  
+  for (let i = 0; i < count; i++) {
+    const gender = Math.random() < 0.5 ? '男' : '女';
+    const name = randFrom(gender === '男' ? maleNames : femaleNames);
+    const race = randFrom(races);
+    const age = randRange(16, 60);
+    const hp = 100;
+    const mental = 100;
+    const happiness = 50;
+
+    let str = randRange(10, 30);
+    let end = randRange(10, 30);
+    let dex = randRange(5, 15);
+    let mgc = randRange(10, 30);
+    let chm = gender === '男' ? randRange(5, 20) : randRange(15, 30);
+    let int = randRange(10, 30);
+    let dil = randRange(10, 30);
+    let eth = randRange(10, 30);
+    let crg = randRange(10, 30);
+    let lov = randRange(10, 30);
+
+    const maleBodyTraits = {
   '健康的': { all: 100 },
   '小太り': { str: 3, chm: -3 },
   '肥満': { chm: -5 },
@@ -74,26 +95,6 @@ function generateInitialVillagers(count) {
   '綺麗好き': { dil: 8 },
   '肉食系': { lov: 5 }
 };
-
-  for (let i = 0; i < count; i++) {
-    const gender = Math.random() < 0.5 ? '男' : '女';
-    const name = randFrom(gender === '男' ? maleNames : femaleNames);
-    const race = randFrom(races);
-    const age = randRange(16, 60);
-    const hp = 100;
-    const mental = 100;
-    const happiness = 50;
-
-    let str = randRange(10, 30);
-    let end = randRange(10, 30);
-    let dex = randRange(5, 15);
-    let mgc = randRange(10, 30);
-    let chm = gender === '男' ? randRange(5, 20) : randRange(15, 30);
-    let int = randRange(10, 30);
-    let dil = randRange(10, 30);
-    let eth = randRange(10, 30);
-    let crg = randRange(10, 30);
-    let lov = randRange(10, 30);
 
         const bodyTraitList = gender === '男' ? Object.keys(maleBodyTraits) : Object.keys(femaleBodyTraits);
     const bodyTrait = randFrom(bodyTraitList);
