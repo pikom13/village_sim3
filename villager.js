@@ -127,8 +127,6 @@ function generateInitialVillagers(count) {
 };
 
 
-    const bodyTrait = randFrom(gender === '男' ? maleBodyTraits : femaleBodyTraits);
-    const mindTrait = randFrom(gender === '男' ? maleMindTraits : femaleMindTraits);
 
 
     villagers.push({ name, gender, race, age, hp, mental, happiness, str, end, dex, mgc, chm, int, dil, eth, crg, lov, bodyTrait, mindTrait });
