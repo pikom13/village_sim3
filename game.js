@@ -46,26 +46,30 @@ function render() {
   villagers.forEach((v, i) => {
     const row = document.createElement('tr');
 
+    const genderColor = v.gender === '男' ? '#d0f0ff' : '#ffd0e0'; // 水色 or ピンク
+    // 状態データ（背景：性別色）
     row.innerHTML = `
-      <td>${v.name}</td>
-      <td>${v.gender}</td>
-      <td>${v.age}</td>
-      <td>${v.race}</td>
-      <td>${v.hp}</td>
-      <td>${v.mental}</td>
-      <td>${v.happiness}</td>
-      <td>${v.str}</td>
-      <td>${v.end}</td>
-      <td>${v.dex}</td>
-      <td>${v.mgc}</td>
-      <td>${v.chm}</td>
-      <td>${v.bodyTrait}</td>
-      <td>${v.int}</td>
-      <td>${v.dil}</td>
-      <td>${v.eth}</td>
-      <td>${v.crg}</td>
-      <td>${v.lov}</td>
-      <td>${v.mindTrait}</td>
+      <td style="background-color:${genderColor}">${v.name}</td>
+      <td style="background-color:${genderColor}">${v.gender}</td>
+      <td style="background-color:${genderColor}">${v.age}</td>
+      <td style="background-color:${genderColor}">${v.race}</td>
+      <td style="background-color:${genderColor}">${v.hp}</td>
+      <td style="background-color:${genderColor}">${v.mental}</td>
+      <td style="background-color:${genderColor}">${v.happiness}</td>
+
+      <td style="background-color:#fffac8">${v.str}</td>
+      <td style="background-color:#fffac8">${v.end}</td>
+      <td style="background-color:#fffac8">${v.dex}</td>
+      <td style="background-color:#fffac8">${v.mgc}</td>
+      <td style="background-color:#fffac8">${v.chm}</td>
+      <td style="background-color:#fffac8">${v.bodyTrait}</td>
+
+      <td style="background-color:#ccffcc">${v.int}</td>
+      <td style="background-color:#ccffcc">${v.dil}</td>
+      <td style="background-color:#ccffcc">${v.eth}</td>
+      <td style="background-color:#ccffcc">${v.crg}</td>
+      <td style="background-color:#ccffcc">${v.lov}</td>
+      <td style="background-color:#ccffcc">${v.mindTrait}</td>
     `;
 
     // 職業 select
