@@ -12,58 +12,7 @@ function randRange(min, max) {
 
 function generateInitialVillagers(count) {
   const villagers = [];
-  for (let i = 0; i < count; i++) {
-    const gender = Math.random() < 0.5 ? '男' : '女';
-    const name = randFrom(gender === '男' ? maleNames : femaleNames);
-    const race = randFrom(races);
-    const age = randRange(16, 60);
-    const hp = 100;
-    const mental = 100;
-    const happiness = 50;
-
-    let str = randRange(10, 30);
-    let end = randRange(10, 30);
-    let dex = randRange(5, 15);
-    let mgc = randRange(10, 30);
-    let chm = gender === '男' ? randRange(5, 20) : randRange(15, 30);
-    let int = randRange(10, 30);
-    let dil = randRange(10, 30);
-    let eth = randRange(10, 30);
-    let crg = randRange(10, 30);
-    let lov = randRange(10, 30);
-
-        const bodyTraitList = gender === '男' ? Object.keys(maleBodyTraits) : Object.keys(femaleBodyTraits);
-    const bodyTrait = randFrom(bodyTraitList);
-
-    const mindTraitList = gender === '男' ? Object.keys(maleMindTraits) : Object.keys(femaleMindTraits); 
-    const mindTrait = randFrom(mindTraitList);
-
-    const bodyEffects = gender === '男' ? maleBodyTraits[bodyTrait] : femaleBodyTraits[bodyTrait];
-    const mindEffects = gender === '男' ? maleMindTraits[mindTrait] : femaleMineTraits[mindTrait];
-
-// 肉体特性補正
-    for (const key in bodyEffects) {
-      const value = bodyEffects[key];
-      if (key === 'all') {
-        str += value; end += value; dex += value; mgc += value; chm += value;
-      } else if (key === 'str') str += value;
-      else if (key === 'end') end += value;
-      else if (key === 'dex') dex += value;
-      else if (key === 'mgc') mgc += value;
-      else if (key === 'chm') chm += value;
-    }
-
-    // 精神特性補正
-    for (const key in mindEffects) {
-      const value = mindEffects[key];
-      if (key === 'int') int += value;
-      else if (key === 'dil') dil += value;
-      else if (key === 'eth') eth += value;
-      else if (key === 'crg') crg += value;
-      else if (key === 'lov') lov += value;
-    }
-
-    const maleBodyTraits = {
+  const maleBodyTraits = {
   '健康的': { all: 100 },
   '小太り': { str: 3, chm: -3 },
   '肥満': { chm: -5 },
@@ -125,6 +74,59 @@ function generateInitialVillagers(count) {
   '綺麗好き': { dil: 8 },
   '肉食系': { lov: 5 }
 };
+
+  for (let i = 0; i < count; i++) {
+    const gender = Math.random() < 0.5 ? '男' : '女';
+    const name = randFrom(gender === '男' ? maleNames : femaleNames);
+    const race = randFrom(races);
+    const age = randRange(16, 60);
+    const hp = 100;
+    const mental = 100;
+    const happiness = 50;
+
+    let str = randRange(10, 30);
+    let end = randRange(10, 30);
+    let dex = randRange(5, 15);
+    let mgc = randRange(10, 30);
+    let chm = gender === '男' ? randRange(5, 20) : randRange(15, 30);
+    let int = randRange(10, 30);
+    let dil = randRange(10, 30);
+    let eth = randRange(10, 30);
+    let crg = randRange(10, 30);
+    let lov = randRange(10, 30);
+
+        const bodyTraitList = gender === '男' ? Object.keys(maleBodyTraits) : Object.keys(femaleBodyTraits);
+    const bodyTrait = randFrom(bodyTraitList);
+
+    const mindTraitList = gender === '男' ? Object.keys(maleMindTraits) : Object.keys(femaleMindTraits); 
+    const mindTrait = randFrom(mindTraitList);
+
+    const bodyEffects = gender === '男' ? maleBodyTraits[bodyTrait] : femaleBodyTraits[bodyTrait];
+    const mindEffects = gender === '男' ? maleMindTraits[mindTrait] : femaleMineTraits[mindTrait];
+
+// 肉体特性補正
+    for (const key in bodyEffects) {
+      const value = bodyEffects[key];
+      if (key === 'all') {
+        str += value; end += value; dex += value; mgc += value; chm += value;
+      } else if (key === 'str') str += value;
+      else if (key === 'end') end += value;
+      else if (key === 'dex') dex += value;
+      else if (key === 'mgc') mgc += value;
+      else if (key === 'chm') chm += value;
+    }
+
+    // 精神特性補正
+    for (const key in mindEffects) {
+      const value = mindEffects[key];
+      if (key === 'int') int += value;
+      else if (key === 'dil') dil += value;
+      else if (key === 'eth') eth += value;
+      else if (key === 'crg') crg += value;
+      else if (key === 'lov') lov += value;
+    }
+
+
 
 
 
