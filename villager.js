@@ -32,11 +32,100 @@ function generateInitialVillagers(count) {
     let crg = randRange(10, 30);
     let lov = randRange(10, 30);
 
-    const maleBodyTraits = ['健康的', '小太り', '肥満', '巨漢', '悪人顔', '長身', 'がっしり', '筋肉質', 'スマート', '地味', '美形', '中肉中背', '巨躯'];
-    const femaleBodyTraits = ['健康的', '華奢', 'ミステリアス', '長身', 'スタイル抜群', 'クール', 'スレンダー', '豊満', '絶世の美女', 'しなやか', '癒し系'];
+        const bodyTraitList = gender === '男' ? Object.keys(maleBodyTraits) : Object.keys(femaleBodyTraits);
+    const bodyTrait = randFrom(bodyTraitList);
 
-    const maleMindTraits = ['普通', '卑屈', '好奇心旺盛', '活発', '知性派', '根暗', '堅物', '怠け者', '働き者', '善人', '無鉄砲', 'ろくでなし', '浮気性', '草食系'];
-    const femaleMindTraits = ['普通', '卑屈', '好奇心旺盛', '活発', '知性派', '根暗', '堅物', '怠け者', '働き者', '善人', '男勝り', '本の虫', '綺麗好き', '肉食系'];
+    const mindTraitList = gender === '男' ? Object.keys(maleMindTraits) : Object.keys(femaleMindTraits); 
+    const mindTrait = randFrom(mindTraitList);
+
+    const bodyEffects = gender === '男' ? maleBodyTraits[bodyTrait] : femaleBodyTraits[bodyTrait];
+    const mindEffects = gender === '男' ? maleMindTraits[mindTrait] : femaleMineTraits[mindTrait];
+
+// 肉体特性補正
+    for (const key in bodyEffects) {
+      const value = bodyEffects[key];
+      if (key === 'all') {
+        str += value; end += value; dex += value; mgc += value; chm += value;
+      } else if (key === 'str') str += value;
+      else if (key === 'end') end += value;
+      else if (key === 'dex') dex += value;
+      else if (key === 'mgc') mgc += value;
+      else if (key === 'chm') chm += value;
+    }
+
+    // 精神特性補正
+    for (const key in mindEffects) {
+      const value = mindEffects[key];
+      if (key === 'int') int += value;
+      else if (key === 'dil') dil += value;
+      else if (key === 'eth') eth += value;
+      else if (key === 'crg') crg += value;
+      else if (key === 'lov') lov += value;
+    }
+
+    const maleBodyTraits = {
+  '健康的': { all: 3 },
+  '小太り': { str: 3, chm: -3 },
+  '肥満': { chm: -5 },
+  '巨漢': { str: 8 },
+  '悪人顔': { chm: -5 },
+  '長身': { chm: 3 },
+  'がっしり': { str: 5 },
+  '筋肉質': { str: 12 },
+  'スマート': { chm: 8 },
+  '地味': { chm: -3 },
+  '美形': { chm: 10 },
+  '中肉中背': {},
+  '巨躯': { str: 8 }
+};
+    const femaleBodyTraits = {
+  '健康的': { all: 3 },
+  '華奢': { chm: 5, str: -5 },
+  'ミステリアス': { chm: 4, mgc: 3 },
+  '長身': {},
+  'スタイル抜群': { chm: 5 },
+  'クール': { dex: 3, chm: 2 },
+  'スレンダー': { dex: 3, str: -5 },
+  '豊満': { chm: 5, end: 2, mgc: 2 },
+  '絶世の美女': { chm: 10 },
+  'しなやか': { str: 3, end: 3, dex: 2 },
+  '癒し系': { chm: 5, mgc: 5 }
+};
+
+    const maleMindTraits = {
+  '普通': {},
+  '卑屈': { dil: -3, lov: 3 },
+  '好奇心旺盛': { crg: 3 },
+  '活発': { dil: 3 },
+  '知性派': { int: 5 },
+  '根暗': { eth: 3, int: 3 },
+  '堅物': { lov: -3 },
+  '怠け者': { dil: -3, eth: -3, lov: 5 },
+  '働き者': { dil: 5 },
+  '善人': { eth: 5 },
+  '無鉄砲': { crg: 5 },
+  'ろくでなし': { eth: -6, lov: 5 },
+  '浮気性': { lov: 10 },
+  '草食系': { dil: 3, lov: -3 },
+};
+
+    const femaleMindTraits = {
+  '普通': {},
+  '卑屈': { dil: -3, lov: 3 },
+  '好奇心旺盛': { crg: 3 },
+  '活発': { dil: 3 },
+  '知性派': { int: 5 },
+  '根暗': { eth: 3, int: 3 },
+  '堅物': { lov: -3 },
+  '怠け者': { dil: -3, eth: -3, lov: 5 },
+  '働き者': { dil: 5 },
+  '善人': { eth: 5 },
+  '男勝り': { crg: 5 },
+  '本の虫': { int: 5 },
+  '綺麗好き': { dil: 8 },
+  '肉食系': { lov: 5 }
+};
+
 
     const bodyTrait = randFrom(gender === '男' ? maleBodyTraits : femaleBodyTraits);
     const mindTrait = randFrom(gender === '男' ? maleMindTraits : femaleMindTraits);
