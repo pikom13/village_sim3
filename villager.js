@@ -20,8 +20,6 @@ function generateInitialVillagers(count) {
     const hp = 100;
     const mental = 100;
     const happiness = 50;
-    const bodyTrait = randFrom(gender === '男' ? maleBodyTraits : femaleBodyTraits);
-    const mindTrait = randFrom(gender === '男' ? maleMindTraits : femaleMindTraits);
 
     let str = randRange(10, 30);
     let end = randRange(10, 30);
@@ -39,6 +37,9 @@ function generateInitialVillagers(count) {
 
     const maleMindTraits = ['普通', '卑屈', '好奇心旺盛', '活発', '知性派', '根暗', '堅物', '怠け者', '働き者', '善人', '無鉄砲', 'ろくでなし', '浮気性', '草食系'];
     const femaleMindTraits = ['普通', '卑屈', '好奇心旺盛', '活発', '知性派', '根暗', '堅物', '怠け者', '働き者', '善人', '男勝り', '本の虫', '綺麗好き', '肉食系'];
+
+    const bodyTrait = randFrom(gender === '男' ? maleBodyTraits : femaleBodyTraits);
+    const mindTrait = randFrom(gender === '男' ? maleMindTraits : femaleMindTraits);
 
 
     villagers.push({ name, gender, race, age, hp, mental, happiness, str, end, dex, mgc, chm, int, dil, eth, crg, lov, bodyTrait, mindTrait });
