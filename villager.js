@@ -64,7 +64,7 @@ function generateInitialVillagers(count) {
     }
 
     const maleBodyTraits = {
-  '健康的': { all: 3 },
+  '健康的': { all: 100 },
   '小太り': { str: 3, chm: -3 },
   '肥満': { chm: -5 },
   '巨漢': { str: 8 },
